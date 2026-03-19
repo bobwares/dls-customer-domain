@@ -1,0 +1,12 @@
+version: 1
+
+lookup:
+  id: countries
+  description: Supported customer countries
+  items:
+    - label: USA
+      value: USA
+    - label: Canada
+      value: Canada
+    - label: Mexico
+      value: Mexico

@@ -1,0 +1,78 @@
+version: 1
+
+models:
+  CustomerRecord:
+    kind: persistence-model
+    storage:
+      table: customers
+    description: Persisted customer row
+    fields:
+      customer_id:
+        type: uuid
+        primaryKey: true
+      first_name:
+        type: varchar(50)
+        nullable: false
+      middle_initial:
+        type: char(1)
+        nullable: true
+      last_name:
+        type: varchar(50)
+        nullable: false
+      age:
+        type: integer
+        nullable: false
+      password_hash:
+        type: varchar(255)
+        nullable: false
+      phone:
+        type: varchar(20)
+        nullable: true
+      email:
+        type: varchar(255)
+        nullable: true
+      preferences_json:
+        type: jsonb
+        nullable: true
+      home_line1:
+        type: varchar(100)
+        nullable: false
+      home_line2:
+        type: varchar(100)
+        nullable: true
+      home_city:
+        type: varchar(60)
+        nullable: false
+      home_country:
+        type: varchar(30)
+        nullable: false
+      home_region:
+        type: varchar(60)
+        nullable: true
+      home_postal_code:
+        type: varchar(16)
+        nullable: true
+      billing_line1:
+        type: varchar(100)
+        nullable: false
+      billing_line2:
+        type: varchar(100)
+        nullable: true
+      billing_city:
+        type: varchar(60)
+        nullable: false
+      billing_country:
+        type: varchar(30)
+        nullable: false
+      billing_region:
+        type: varchar(60)
+        nullable: true
+      billing_postal_code:
+        type: varchar(16)
+        nullable: true
+    indexes:
+      - name: idx_customers_email
+        fields:
+          - email
+        unique: true
+        where: email IS NOT NULL

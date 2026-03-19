@@ -1,0 +1,139 @@
+version: 1
+
+models:
+  AddressForm:
+    kind: ui-form-model
+    description: Editable address state used by the customer form
+    fields:
+      line1:
+        type: string
+        required: true
+        validation:
+          minLength: 1
+          maxLength: 100
+      line2:
+        type: string
+        required: false
+        validation:
+          maxLength: 100
+      city:
+        type: string
+        required: true
+        validation:
+          minLength: 1
+          maxLength: 60
+      country:
+        type: string
+        required: true
+        validation:
+          allowedValuesRef: ../../lookups/countries.lookup.yaml#/lookup/items
+      stateCode:
+        type: string
+        requiredWhen:
+          all:
+            - path: country
+              op: eq
+              value: USA
+      provinceText:
+        type: string
+        requiredWhen:
+          all:
+            - path: country
+              op: neq
+              value: USA
+            - path: country
+              op: notEmpty
+      postalCode:
+        type: string
+        requiredWhen:
+          all:
+            - path: country
+              op: eq
+              value: USA
+        validation:
+          pattern: '^\\d{5}(-\\d{4})?$'
+          message: ZIP must be 12345 or 12345-6789
+
+  CustomerForm:
+    kind: ui-form-model
+    description: Editable state for customer create and edit screens
+    defaults:
+      sameAsHomeAddress: false
+      preferences: {}
+      homeAddress:
+        line1: ''
+        line2: ''
+        city: ''
+        country: ''
+        stateCode: ''
+        provinceText: ''
+        postalCode: ''
+      billingAddress:
+        line1: ''
+        line2: ''
+        city: ''
+        country: ''
+        stateCode: ''
+        provinceText: ''
+        postalCode: ''
+    fields:
+      id:
+        type: string
+        required: false
+      firstName:
+        type: string
+        required: true
+        validation:
+          minLength: 1
+          maxLength: 50
+      middleInitial:
+        type: string
+        required: false
+        validation:
+          maxLength: 1
+          pattern: '^[A-Za-z]$'
+      lastName:
+        type: string
+        required: true
+        validation:
+          minLength: 1
+          maxLength: 50
+      age:
+        type: number
+        required: true
+        validation:
+          rules:
+            - name: adult-age
+              path: age
+              op: gt
+              value: 18
+              message: Age must be greater than 18
+      password:
+        type: string
+        required: true
+        validation:
+          minLength: 6
+          message: Password must be at least 6 characters
+      phone:
+        type: string
+        required: false
+        validation:
+          pattern: '^\\(\\d{3}\\) \\d{3}-\\d{4}$'
+          message: Phone number must match format (555) 123-4567
+      email:
+        type: string
+        required: false
+        validation:
+          format: email
+      preferences:
+        type: object
+        required: false
+      sameAsHomeAddress:
+        type: boolean
+        required: true
+      homeAddress:
+        type: ref
+        modelRef: '#/models/AddressForm'
+      billingAddress:
+        type: ref
+        modelRef: '#/models/AddressForm'

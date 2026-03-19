@@ -1,0 +1,31 @@
+version: 1
+
+page:
+  id: customer-edit
+  route: /customers/{id}/edit
+  title: Edit Customer
+  mode: edit
+  layout:
+    type: single-column
+  form:
+    modelRef: ../../models/ui/customer-form.model.yaml#/models/CustomerForm
+    stateAlias: customer
+    load:
+      source: api
+      endpointRef: ../../backend/customer.backend.yaml#/endpoints/getCustomer
+      responseMapperRef: ../../mappers/customer-persistence-to-api.mapper.yaml#/mappers/CustomerResponseToCustomerForm
+    submitAction: updateCustomer
+  sections:
+    - includeRef: ./customer-create.page.yaml#/page/sections/0
+    - includeRef: ./customer-create.page.yaml#/page/sections/1
+    - includeRef: ./customer-create.page.yaml#/page/sections/2
+    - id: submit
+      type: form-section
+      fields:
+        - id: submitButton
+          type: button
+          label: Update Customer
+          action: updateCustomer
+          ui:
+            variant: primary
+            testId: customer-submit

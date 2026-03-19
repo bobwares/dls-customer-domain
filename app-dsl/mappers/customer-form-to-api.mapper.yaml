@@ -1,0 +1,71 @@
+version: 1
+
+syncRules:
+  syncBillingAddressFromHome:
+    when:
+      all:
+        - path: customer.sameAsHomeAddress
+          op: eq
+          value: true
+    actions:
+      - type: copy-object
+        from: customer.homeAddress
+        to: customer.billingAddress
+
+mappers:
+  CustomerFormToCreateCustomerRequest:
+    fromModelRef: ../models/ui/customer-form.model.yaml#/models/CustomerForm
+    toModelRef: ../models/api/customer-api.model.yaml#/models/CreateCustomerRequest
+    rules:
+      firstName:
+        from: firstName
+      middleInitial:
+        from: middleInitial
+      lastName:
+        from: lastName
+      age:
+        from: age
+      password:
+        from: password
+      phone:
+        from: phone
+      email:
+        from: email
+      preferences:
+        from: preferences
+      homeAddress:
+        object:
+          line1:
+            from: homeAddress.line1
+          line2:
+            from: homeAddress.line2
+          city:
+            from: homeAddress.city
+          country:
+            from: homeAddress.country
+          region:
+            fromExpr: homeAddress.country == 'USA' ? homeAddress.stateCode : homeAddress.provinceText
+          postalCode:
+            from: homeAddress.postalCode
+      billingAddress:
+        object:
+          line1:
+            fromExpr: sameAsHomeAddress ? homeAddress.line1 : billingAddress.line1
+          line2:
+            fromExpr: sameAsHomeAddress ? homeAddress.line2 : billingAddress.line2
+          city:
+            fromExpr: sameAsHomeAddress ? homeAddress.city : billingAddress.city
+          country:
+            fromExpr: sameAsHomeAddress ? homeAddress.country : billingAddress.country
+          region:
+            fromExpr: sameAsHomeAddress ? (homeAddress.country == 'USA' ? homeAddress.stateCode : homeAddress.provinceText) : (billingAddress.country == 'USA' ? billingAddress.stateCode : billingAddress.provinceText)
+          postalCode:
+            fromExpr: sameAsHomeAddress ? homeAddress.postalCode : billingAddress.postalCode
+
+  CustomerFormToUpdateCustomerRequest:
+    fromModelRef: ../models/ui/customer-form.model.yaml#/models/CustomerForm
+    toModelRef: ../models/api/customer-api.model.yaml#/models/UpdateCustomerRequest
+    extends: '#/mappers/CustomerFormToCreateCustomerRequest'
+    rules:
+      id:
+        from: id

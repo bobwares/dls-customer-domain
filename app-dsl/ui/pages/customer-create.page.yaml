@@ -1,0 +1,292 @@
+version: 1
+
+page:
+  id: customer-create
+  route: /customers/new
+  title: Create Customer
+  mode: create
+  layout:
+    type: single-column
+  form:
+    modelRef: ../../models/ui/customer-form.model.yaml#/models/CustomerForm
+    stateAlias: customer
+    submitAction: createCustomer
+  sections:
+    - id: customer-information
+      type: form-section
+      title: Customer Information
+      fields:
+        - id: firstName
+          type: text-field
+          label: First Name
+          bind: customer.firstName
+          ui:
+            width: md
+            autocomplete: given-name
+            testId: customer-first-name
+
+        - id: middleInitial
+          type: text-field
+          label: MI
+          bind: customer.middleInitial
+          ui:
+            width: xs
+            testId: customer-middle-initial
+
+        - id: lastName
+          type: text-field
+          label: Last Name
+          bind: customer.lastName
+          ui:
+            width: md
+            autocomplete: family-name
+            testId: customer-last-name
+
+        - id: age
+          type: number-field
+          label: Age
+          bind: customer.age
+          ui:
+            width: xs
+            testId: customer-age
+
+        - id: password
+          type: password-field
+          label: Password
+          bind: customer.password
+          ui:
+            width: md
+            testId: customer-password
+
+        - id: email
+          type: email-field
+          label: Email
+          bind: customer.email
+          ui:
+            width: lg
+            autocomplete: email
+            testId: customer-email
+
+        - id: phone
+          type: phone-field
+          label: Phone
+          bind: customer.phone
+          ui:
+            width: sm
+            inputMask: '(###) ###-####'
+            autocomplete: tel-national
+            testId: customer-phone
+
+    - id: home-address
+      type: form-section
+      title: Home Address
+      fields:
+        - id: homeAddressLine1
+          type: text-field
+          label: Address Line 1
+          bind: customer.homeAddress.line1
+          ui:
+            width: lg
+            testId: customer-home-address-line1
+
+        - id: homeAddressLine2
+          type: text-field
+          label: Address Line 2
+          bind: customer.homeAddress.line2
+          ui:
+            width: lg
+            testId: customer-home-address-line2
+
+        - id: homeCity
+          type: text-field
+          label: City
+          bind: customer.homeAddress.city
+          ui:
+            width: md
+            testId: customer-home-city
+
+        - id: homeCountry
+          type: select
+          label: Country
+          bind: customer.homeAddress.country
+          optionsRef: ../../lookups/countries.lookup.yaml#/lookup/items
+          ui:
+            width: sm
+            testId: customer-home-country
+
+        - id: homeState
+          type: select
+          label: State
+          bind: customer.homeAddress.stateCode
+          optionsRef: ../../lookups/us-states.lookup.yaml#/lookup/items
+          visibleWhen:
+            all:
+              - path: customer.homeAddress.country
+                op: eq
+                value: USA
+          ui:
+            width: sm
+            testId: customer-home-state-select
+
+        - id: homeProvince
+          type: text-field
+          label: State / Province
+          bind: customer.homeAddress.provinceText
+          visibleWhen:
+            all:
+              - path: customer.homeAddress.country
+                op: neq
+                value: USA
+              - path: customer.homeAddress.country
+                op: notEmpty
+          ui:
+            width: md
+            testId: customer-home-state-text
+
+        - id: homeZip
+          type: text-field
+          label: ZIP
+          bind: customer.homeAddress.postalCode
+          visibleWhen:
+            all:
+              - path: customer.homeAddress.country
+                op: eq
+                value: USA
+          ui:
+            width: xs
+            testId: customer-home-zip
+
+    - id: billing-address
+      type: form-section
+      title: Billing Address
+      fields:
+        - id: sameAsHomeAddress
+          type: checkbox
+          label: Billing address same as home address
+          bind: customer.sameAsHomeAddress
+          actions:
+            - type: apply-mapper
+              mapperRef: ../../mappers/customer-form-to-api.mapper.yaml#/syncRules/syncBillingAddressFromHome
+          ui:
+            testId: customer-same-as-home-address
+
+        - id: billingAddressLine1
+          type: text-field
+          label: Address Line 1
+          bind: customer.billingAddress.line1
+          disabledWhen:
+            all:
+              - path: customer.sameAsHomeAddress
+                op: eq
+                value: true
+          ui:
+            width: lg
+            testId: customer-billing-address-line1
+
+        - id: billingAddressLine2
+          type: text-field
+          label: Address Line 2
+          bind: customer.billingAddress.line2
+          disabledWhen:
+            all:
+              - path: customer.sameAsHomeAddress
+                op: eq
+                value: true
+          ui:
+            width: lg
+            testId: customer-billing-address-line2
+
+        - id: billingCity
+          type: text-field
+          label: City
+          bind: customer.billingAddress.city
+          disabledWhen:
+            all:
+              - path: customer.sameAsHomeAddress
+                op: eq
+                value: true
+          ui:
+            width: md
+            testId: customer-billing-city
+
+        - id: billingCountry
+          type: select
+          label: Country
+          bind: customer.billingAddress.country
+          optionsRef: ../../lookups/countries.lookup.yaml#/lookup/items
+          disabledWhen:
+            all:
+              - path: customer.sameAsHomeAddress
+                op: eq
+                value: true
+          ui:
+            width: sm
+            testId: customer-billing-country
+
+        - id: billingState
+          type: select
+          label: State
+          bind: customer.billingAddress.stateCode
+          optionsRef: ../../lookups/us-states.lookup.yaml#/lookup/items
+          visibleWhen:
+            all:
+              - path: customer.billingAddress.country
+                op: eq
+                value: USA
+          disabledWhen:
+            all:
+              - path: customer.sameAsHomeAddress
+                op: eq
+                value: true
+          ui:
+            width: sm
+            testId: customer-billing-state-select
+
+        - id: billingProvince
+          type: text-field
+          label: State / Province
+          bind: customer.billingAddress.provinceText
+          visibleWhen:
+            all:
+              - path: customer.billingAddress.country
+                op: neq
+                value: USA
+              - path: customer.billingAddress.country
+                op: notEmpty
+          disabledWhen:
+            all:
+              - path: customer.sameAsHomeAddress
+                op: eq
+                value: true
+          ui:
+            width: md
+            testId: customer-billing-state-text
+
+        - id: billingZip
+          type: text-field
+          label: ZIP
+          bind: customer.billingAddress.postalCode
+          visibleWhen:
+            all:
+              - path: customer.billingAddress.country
+                op: eq
+                value: USA
+          disabledWhen:
+            all:
+              - path: customer.sameAsHomeAddress
+                op: eq
+                value: true
+          ui:
+            width: xs
+            testId: customer-billing-zip
+
+    - id: submit
+      type: form-section
+      fields:
+        - id: submitButton
+          type: button
+          label: Save Customer
+          action: createCustomer
+          ui:
+            variant: primary
+            testId: customer-submit

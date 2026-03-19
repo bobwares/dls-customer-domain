@@ -1,0 +1,106 @@
+version: 1
+
+mappers:
+  CustomerRecordToCustomerResponse:
+    fromModelRef: ../models/persistence/customer.persistence.model.yaml#/models/CustomerRecord
+    toModelRef: ../models/api/customer-api.model.yaml#/models/CustomerResponse
+    rules:
+      id:
+        from: customer_id
+      firstName:
+        from: first_name
+      middleInitial:
+        from: middle_initial
+      lastName:
+        from: last_name
+      age:
+        from: age
+      phone:
+        from: phone
+      email:
+        from: email
+      preferences:
+        from: preferences_json
+      homeAddress:
+        object:
+          line1:
+            from: home_line1
+          line2:
+            from: home_line2
+          city:
+            from: home_city
+          country:
+            from: home_country
+          region:
+            from: home_region
+          postalCode:
+            from: home_postal_code
+      billingAddress:
+        object:
+          line1:
+            from: billing_line1
+          line2:
+            from: billing_line2
+          city:
+            from: billing_city
+          country:
+            from: billing_country
+          region:
+            from: billing_region
+          postalCode:
+            from: billing_postal_code
+
+  CustomerResponseToCustomerForm:
+    fromModelRef: ../models/api/customer-api.model.yaml#/models/CustomerResponse
+    toModelRef: ../models/ui/customer-form.model.yaml#/models/CustomerForm
+    rules:
+      id:
+        from: id
+      firstName:
+        from: firstName
+      middleInitial:
+        from: middleInitial
+      lastName:
+        from: lastName
+      age:
+        from: age
+      phone:
+        from: phone
+      email:
+        from: email
+      preferences:
+        from: preferences
+      sameAsHomeAddress:
+        fromExpr: homeAddress.line1 == billingAddress.line1 && homeAddress.line2 == billingAddress.line2 && homeAddress.city == billingAddress.city && homeAddress.country == billingAddress.country && homeAddress.region == billingAddress.region && homeAddress.postalCode == billingAddress.postalCode
+      homeAddress:
+        object:
+          line1:
+            from: homeAddress.line1
+          line2:
+            from: homeAddress.line2
+          city:
+            from: homeAddress.city
+          country:
+            from: homeAddress.country
+          stateCode:
+            fromExpr: homeAddress.country == 'USA' ? homeAddress.region : ''
+          provinceText:
+            fromExpr: homeAddress.country == 'USA' ? '' : homeAddress.region
+          postalCode:
+            from: homeAddress.postalCode
+      billingAddress:
+        object:
+          line1:
+            from: billingAddress.line1
+          line2:
+            from: billingAddress.line2
+          city:
+            from: billingAddress.city
+          country:
+            from: billingAddress.country
+          stateCode:
+            fromExpr: billingAddress.country == 'USA' ? billingAddress.region : ''
+          provinceText:
+            fromExpr: billingAddress.country == 'USA' ? '' : billingAddress.region
+          postalCode:
+            from: billingAddress.postalCode

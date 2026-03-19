@@ -1,0 +1,156 @@
+version: 1
+
+models:
+  AddressDto:
+    kind: api-model
+    description: Address payload transported through the customer API
+    fields:
+      line1:
+        type: string
+        required: true
+      line2:
+        type: string
+        required: false
+      city:
+        type: string
+        required: true
+      country:
+        type: string
+        required: true
+      region:
+        type: string
+        required: false
+      postalCode:
+        type: string
+        required: false
+
+  CreateCustomerRequest:
+    kind: api-model
+    description: Request body for creating a customer
+    fields:
+      firstName:
+        type: string
+        required: true
+      middleInitial:
+        type: string
+        required: false
+      lastName:
+        type: string
+        required: true
+      age:
+        type: number
+        required: true
+      password:
+        type: string
+        required: true
+      phone:
+        type: string
+        required: false
+      email:
+        type: string
+        required: false
+      preferences:
+        type: object
+        required: false
+      homeAddress:
+        type: ref
+        modelRef: '#/models/AddressDto'
+      billingAddress:
+        type: ref
+        modelRef: '#/models/AddressDto'
+
+  UpdateCustomerRequest:
+    kind: api-model
+    description: Request body for updating a customer
+    fields:
+      id:
+        type: string
+        required: true
+      firstName:
+        type: string
+        required: true
+      middleInitial:
+        type: string
+        required: false
+      lastName:
+        type: string
+        required: true
+      age:
+        type: number
+        required: true
+      password:
+        type: string
+        required: false
+      phone:
+        type: string
+        required: false
+      email:
+        type: string
+        required: false
+      preferences:
+        type: object
+        required: false
+      homeAddress:
+        type: ref
+        modelRef: '#/models/AddressDto'
+      billingAddress:
+        type: ref
+        modelRef: '#/models/AddressDto'
+
+  CustomerResponse:
+    kind: api-model
+    description: Customer returned by the API
+    fields:
+      id:
+        type: string
+        required: true
+      firstName:
+        type: string
+        required: true
+      middleInitial:
+        type: string
+        required: false
+      lastName:
+        type: string
+        required: true
+      age:
+        type: number
+        required: true
+      phone:
+        type: string
+        required: false
+      email:
+        type: string
+        required: false
+      preferences:
+        type: object
+        required: false
+      homeAddress:
+        type: ref
+        modelRef: '#/models/AddressDto'
+      billingAddress:
+        type: ref
+        modelRef: '#/models/AddressDto'
+
+  ValidationError:
+    kind: api-model
+    description: Standard validation error payload
+    fields:
+      code:
+        type: string
+        required: true
+      message:
+        type: string
+        required: true
+      fieldErrors:
+        type: array
+        required: false
+        items:
+          type: object
+          fields:
+            field:
+              type: string
+              required: true
+            message:
+              type: string
+              required: true

@@ -1,0 +1,96 @@
+version: 1
+
+mappers:
+  CreateCustomerRequestToCustomerRecord:
+    fromModelRef: ../models/api/customer-api.model.yaml#/models/CreateCustomerRequest
+    toModelRef: ../models/persistence/customer.persistence.model.yaml#/models/CustomerRecord
+    rules:
+      customer_id:
+        generated: uuid
+      first_name:
+        from: firstName
+      middle_initial:
+        from: middleInitial
+      last_name:
+        from: lastName
+      age:
+        from: age
+      password_hash:
+        fromExpr: hash(password)
+      phone:
+        from: phone
+      email:
+        from: email
+      preferences_json:
+        from: preferences
+      home_line1:
+        from: homeAddress.line1
+      home_line2:
+        from: homeAddress.line2
+      home_city:
+        from: homeAddress.city
+      home_country:
+        from: homeAddress.country
+      home_region:
+        from: homeAddress.region
+      home_postal_code:
+        from: homeAddress.postalCode
+      billing_line1:
+        from: billingAddress.line1
+      billing_line2:
+        from: billingAddress.line2
+      billing_city:
+        from: billingAddress.city
+      billing_country:
+        from: billingAddress.country
+      billing_region:
+        from: billingAddress.region
+      billing_postal_code:
+        from: billingAddress.postalCode
+
+  UpdateCustomerRequestToCustomerRecord:
+    fromModelRef: ../models/api/customer-api.model.yaml#/models/UpdateCustomerRequest
+    toModelRef: ../models/persistence/customer.persistence.model.yaml#/models/CustomerRecord
+    rules:
+      customer_id:
+        from: id
+      first_name:
+        from: firstName
+      middle_initial:
+        from: middleInitial
+      last_name:
+        from: lastName
+      age:
+        from: age
+      password_hash:
+        fromExpr: password != null && password != '' ? hash(password) : preserveExisting()
+      phone:
+        from: phone
+      email:
+        from: email
+      preferences_json:
+        from: preferences
+      home_line1:
+        from: homeAddress.line1
+      home_line2:
+        from: homeAddress.line2
+      home_city:
+        from: homeAddress.city
+      home_country:
+        from: homeAddress.country
+      home_region:
+        from: homeAddress.region
+      home_postal_code:
+        from: homeAddress.postalCode
+      billing_line1:
+        from: billingAddress.line1
+      billing_line2:
+        from: billingAddress.line2
+      billing_city:
+        from: billingAddress.city
+      billing_country:
+        from: billingAddress.country
+      billing_region:
+        from: billingAddress.region
+      billing_postal_code:
+        from: billingAddress.postalCode

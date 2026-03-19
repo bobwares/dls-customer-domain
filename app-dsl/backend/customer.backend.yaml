@@ -1,0 +1,45 @@
+version: 1
+
+service:
+  id: customer-service
+  namespace: customer
+  description: Backend endpoint specification for customer create, read, and update flows
+
+endpoints:
+  createCustomer:
+    method: POST
+    path: /api/customers
+    requestModelRef: ../models/api/customer-api.model.yaml#/models/CreateCustomerRequest
+    responseModelRef: ../models/api/customer-api.model.yaml#/models/CustomerResponse
+    errorModelRef: ../models/api/customer-api.model.yaml#/models/ValidationError
+    requestMapperRef: ../mappers/customer-form-to-api.mapper.yaml#/mappers/CustomerFormToCreateCustomerRequest
+    persistenceMapperRef: ../mappers/customer-api-to-persistence.mapper.yaml#/mappers/CreateCustomerRequestToCustomerRecord
+    onSuccess:
+      - type: navigate
+        to: /customers
+    onError:
+      - type: show-message
+        level: error
+        text: Unable to create customer
+
+  getCustomer:
+    method: GET
+    path: /api/customers/{id}
+    responseModelRef: ../models/api/customer-api.model.yaml#/models/CustomerResponse
+    responseMapperRef: ../mappers/customer-persistence-to-api.mapper.yaml#/mappers/CustomerRecordToCustomerResponse
+
+  updateCustomer:
+    method: PUT
+    path: /api/customers/{id}
+    requestModelRef: ../models/api/customer-api.model.yaml#/models/UpdateCustomerRequest
+    responseModelRef: ../models/api/customer-api.model.yaml#/models/CustomerResponse
+    errorModelRef: ../models/api/customer-api.model.yaml#/models/ValidationError
+    requestMapperRef: ../mappers/customer-form-to-api.mapper.yaml#/mappers/CustomerFormToUpdateCustomerRequest
+    persistenceMapperRef: ../mappers/customer-api-to-persistence.mapper.yaml#/mappers/UpdateCustomerRequestToCustomerRecord
+    onSuccess:
+      - type: navigate
+        to: /customers
+    onError:
+      - type: show-message
+        level: error
+        text: Unable to update customer
