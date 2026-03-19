@@ -52,7 +52,7 @@ models:
               value: USA
         validation:
           pattern: '^\\d{5}(-\\d{4})?$'
-          message: ZIP must be 12345 or 12345-6789
+          message: "ZIP must be 12345 or 12345-6789"
 
   CustomerForm:
     kind: ui-form-model
@@ -107,19 +107,19 @@ models:
               path: age
               op: gt
               value: 18
-              message: Age must be greater than 18
+              message: "Age must be greater than 18"
       password:
         type: string
         required: true
         validation:
           minLength: 6
-          message: Password must be at least 6 characters
+          message: "Password must be at least 6 characters"
       phone:
         type: string
         required: false
         validation:
           pattern: '^\\(\\d{3}\\) \\d{3}-\\d{4}$'
-          message: Phone number must match format (555) 123-4567
+          message: "Phone number must match format (555) 123-4567"
       email:
         type: string
         required: false
