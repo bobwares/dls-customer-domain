@@ -12,8 +12,8 @@ add the readme and push
 |------------------------|--------------------------------------------------------------|
 | TURN_ID                | T002                                                         |
 | TURN_START_TIME        | 2026-03-19T21:45:00Z                                         |
-| TURN_END_TIME          | [pending]                                                    |
-| TURN_ELAPSED_TIME      | [pending]                                                    |
+| TURN_END_TIME          | 2026-03-19T21:50:00Z                                         |
+| TURN_ELAPSED_TIME      | 5m 0s                                                        |
 | TARGET_PROJECT         | /Users/bobware/gallery/customer-domain                       |
 | CURRENT_TURN_DIRECTORY | ./ai/agentic-pipeline/turns/turn-T002                        |
 | EXECUTION_TRACE_FILE   | ./ai/agentic-pipeline/turns/turn-T002/execution_trace.json   |
@@ -37,8 +37,8 @@ add the readme and push
 | Field                                     | Value                          |
 |-------------------------------------------|--------------------------------|
 | Skills requested in prompt                | none                           |
-| Skills executed (finalize at session-end) | [pending - finalize at turn-end] |
-| Agents executed (finalize at session-end) | [pending - finalize at turn-end] |
+| Skills executed (finalize at session-end) | session-start, turn-init, turn-end |
+| Agents executed (finalize at session-end) | claude                             |
 | Source of truth                           | `execution_trace.json`         |
 
 ## Agent Routing

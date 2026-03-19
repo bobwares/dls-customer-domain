@@ -1,7 +1,8 @@
 {
   "turnId": "T002",
   "startedAt": "2026-03-19T21:45:00Z",
-  "skillsExecuted": ["session-start", "turn-init"],
-  "agentsExecuted": [],
+  "finishedAt": "2026-03-19T21:50:00Z",
+  "skillsExecuted": ["session-start", "turn-end", "turn-init"],
+  "agentsExecuted": ["claude"],
   "notes": "Add README and push to remote"
 }

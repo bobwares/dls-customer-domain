@@ -1,0 +1,37 @@
+{
+  "turnId": "T002",
+  "createdAt": "2026-03-19T21:50:00Z",
+  "agent": "AI Coding Agent (Claude Opus 4.5)",
+  "execution": {
+    "tracePath": "./ai/agentic-pipeline/turns/turn-T002/execution_trace.json",
+    "skillsExecuted": ["session-start", "turn-end", "turn-init"],
+    "agentsExecuted": ["claude"]
+  },
+  "artifacts": [
+    {
+      "path": "README.md",
+      "type": "source",
+      "sha256": "2129dc4b991e63bd4d21340c9cefaeb13bfa81a090be793c24b6bf5337d80840"
+    },
+    {
+      "path": "ai/agentic-pipeline/turns/turn-T002/turn_context.md",
+      "type": "turn-artifact",
+      "sha256": "460ebae499c8c73ae866dae937886800c4b5c225c0747835c6f826339d4794c9"
+    },
+    {
+      "path": "ai/agentic-pipeline/turns/turn-T002/execution_trace.json",
+      "type": "turn-artifact",
+      "sha256": "e8519e2f111c679de8210db3bd95af035436cee9e06cf3f8fb56ec56c180e278"
+    },
+    {
+      "path": "ai/agentic-pipeline/turns/turn-T002/pull_request.md",
+      "type": "turn-artifact",
+      "sha256": "3cb2261bed951b295791fe59458fa541c4a50b960b493639a91e534327112343"
+    },
+    {
+      "path": "ai/agentic-pipeline/turns/turn-T002/adr.md",
+      "type": "turn-artifact",
+      "sha256": "a439fa6ada0d55a1d1a197be3215b4ce7b9d3eca3f147ad6061a67be72b530ce"
+    }
+  ]
+}
