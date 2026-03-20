@@ -1,0 +1,144 @@
+# App: customer-domain
+# Package: app-dsl/ui/pages
+# File: landing.page.yaml
+# Version: 0.1.0
+# Turns: T005
+# Author: AI Coding Agent (Claude Opus 4.5)
+# Date: 2026-03-20T20:14:33Z
+# Description: Landing page with left navigation bar
+# Log:
+# T005, 0.1.0, 2026/03/20, 08:14 PM, Claude Opus 4.5
+
+version: 1
+
+page:
+  id: landing
+  route: /
+  title: Customer Domain
+  mode: dashboard
+  layout:
+    type: sidebar-left
+    sidebar:
+      width: 240
+      collapsible: true
+
+  navigation:
+    id: main-nav
+    position: left
+    items:
+      - id: home
+        label: Home
+        icon: home
+        to: /
+        ui:
+          testId: nav-home
+
+      - id: customers
+        label: Customers
+        icon: users
+        to: /customers
+        ui:
+          testId: nav-customers
+        children:
+          - id: customer-list
+            label: Customer List
+            to: /customers
+            ui:
+              testId: nav-customer-list
+
+          - id: customer-create
+            label: Add Customer
+            to: /customers/new
+            ui:
+              testId: nav-customer-create
+
+      - id: customer-profile
+        label: Customer Profile
+        icon: user
+        to: /customers/{id}
+        ui:
+          testId: nav-customer-profile
+
+  sections:
+    - id: welcome
+      type: hero
+      content:
+        title: Welcome to Customer Domain
+        subtitle: Manage your customer relationships effectively
+        ui:
+          alignment: center
+          spacing: lg
+
+    - id: quick-actions
+      type: card-grid
+      columns: 3
+      gap: md
+      cards:
+        - id: view-customers
+          title: View Customers
+          description: Browse and search your customer database
+          icon: users
+          action:
+            type: navigate
+            to: /customers
+          ui:
+            testId: card-view-customers
+
+        - id: add-customer
+          title: Add Customer
+          description: Create a new customer record
+          icon: user-plus
+          action:
+            type: navigate
+            to: /customers/new
+          ui:
+            testId: card-add-customer
+
+        - id: recent-activity
+          title: Recent Activity
+          description: View recent customer interactions
+          icon: clock
+          action:
+            type: navigate
+            to: /activity
+          ui:
+            testId: card-recent-activity
+
+    - id: stats-overview
+      type: stat-cards
+      columns: 4
+      gap: sm
+      stats:
+        - id: total-customers
+          label: Total Customers
+          value: "{stats.totalCustomers}"
+          icon: users
+          trend:
+            direction: up
+            value: "+12%"
+          ui:
+            testId: stat-total-customers
+
+        - id: new-customers
+          label: New This Month
+          value: "{stats.newThisMonth}"
+          icon: user-plus
+          trend:
+            direction: up
+            value: "+5%"
+          ui:
+            testId: stat-new-customers
+
+        - id: active-customers
+          label: Active Customers
+          value: "{stats.activeCustomers}"
+          icon: activity
+          ui:
+            testId: stat-active-customers
+
+        - id: regions
+          label: Regions
+          value: "{stats.totalRegions}"
+          icon: map
+          ui:
+            testId: stat-regions

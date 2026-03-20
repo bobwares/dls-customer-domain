@@ -1,0 +1,23 @@
+{
+  "turnId": "T005",
+  "createdAt": "2026-03-20T20:15:42Z",
+  "artifacts": {
+    "turn_context.md": {
+      "sha256": "d9c926d31c0c6eea3b8e5fa55cc65c683dd287d494d77e85d35e6dc6b2c331a5"
+    },
+    "execution_trace.json": {
+      "sha256": "aa1ca76d2ec32df65732748a6d3de2426d1c9b5f04aff3e0e9038c895f35b227"
+    },
+    "pull_request.md": {
+      "sha256": "980271f606529ecbba09a9e793cb9d4e58a4e0cc0fb31260e4d6495a7b9e453a"
+    },
+    "adr.md": {
+      "sha256": "26a33c562ce88cdcacf1922060b65c3a1219a9e3b9e3fd9120875bf1cad1e0b5"
+    }
+  },
+  "execution": {
+    "tracePath": "./ai/agentic-pipeline/turns/turn-T005/execution_trace.json",
+    "skillsExecuted": ["turn-init", "turn-end"],
+    "agentsExecuted": ["claude"]
+  }
+}

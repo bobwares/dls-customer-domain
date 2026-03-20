@@ -1,0 +1,8 @@
+{
+  "turnId": "T005",
+  "startedAt": "2026-03-20T20:14:33Z",
+  "finishedAt": "2026-03-20T20:15:42Z",
+  "skillsExecuted": ["turn-init", "turn-end"],
+  "agentsExecuted": ["claude"],
+  "notes": "Created landing page with left navigation and customer profile link"
+}
