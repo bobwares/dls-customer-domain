@@ -130,7 +130,7 @@ page:
 
         - id: homeProvince
           type: text-field
-          label: State / Province
+          label: "State / Province"
           bind: customer.homeAddress.provinceText
           visibleWhen:
             all:
@@ -244,7 +244,7 @@ page:
 
         - id: billingProvince
           type: text-field
-          label: State / Province
+          label: "State / Province"
           bind: customer.billingAddress.provinceText
           visibleWhen:
             all:
