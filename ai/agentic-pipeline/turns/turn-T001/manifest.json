@@ -1,0 +1,66 @@
+{
+  "turnId": 1,
+  "execution": {
+    "tracePath": "./ai/agentic-pipeline/turns/turn-T001/execution_trace.json",
+    "skillsExecuted": ["session-start", "turn-init", "turn-end"],
+    "agentsExecuted": ["claude"]
+  },
+  "tasks": [
+    {
+      "taskId": "T001-1",
+      "agent": "claude",
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "ai/agentic-pipeline/turns/turn-T001/turn_context.md",
+          "sha256": "4a271c3b259e04dcae01c61070d87a43bd9307c419d9ff3def2e407fef25a011"
+        },
+        {
+          "path": "ai/agentic-pipeline/turns/turn-T001/execution_trace.json",
+          "sha256": "9994dc78557c7abaf37d4b1906fb0914328acb81187e4167b375407c1f4d0b2c"
+        },
+        {
+          "path": "ai/agentic-pipeline/turns/turn-T001/pull_request.md",
+          "sha256": "83d40363d887171a5bda3d715429a3b350075c8404e12756c4f2e5548e45f1b3"
+        },
+        {
+          "path": "ai/agentic-pipeline/turns/turn-T001/adr.md",
+          "sha256": "c8288678b8528fee1fda6f8717cb93788955a4abd95f70fe2077e850754c4635"
+        }
+      ],
+      "validations": [
+        {
+          "rule": "metadata-headers",
+          "status": "skipped",
+          "detailsPath": ""
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "promptHash": "458cdbba7ccaf86c8d969e68673ae5a3fbf5412dbe2fe7be8721c7ece983c6f9",
+    "tools": ["Read", "Write", "Edit", "Bash", "Glob"],
+    "startedAt": "2026-03-19T12:00:00Z",
+    "finishedAt": "2026-03-19T21:37:09Z",
+    "activePatternName": "",
+    "activePatternPath": ""
+  },
+  "outputs": [
+    {
+      "path": "ai/agentic-pipeline/turns/turn-T001/turn_context.md",
+      "sha256": "4a271c3b259e04dcae01c61070d87a43bd9307c419d9ff3def2e407fef25a011"
+    },
+    {
+      "path": "ai/agentic-pipeline/turns/turn-T001/execution_trace.json",
+      "sha256": "9994dc78557c7abaf37d4b1906fb0914328acb81187e4167b375407c1f4d0b2c"
+    },
+    {
+      "path": "ai/agentic-pipeline/turns/turn-T001/pull_request.md",
+      "sha256": "83d40363d887171a5bda3d715429a3b350075c8404e12756c4f2e5548e45f1b3"
+    },
+    {
+      "path": "ai/agentic-pipeline/turns/turn-T001/adr.md",
+      "sha256": "c8288678b8528fee1fda6f8717cb93788955a4abd95f70fe2077e850754c4635"
+    }
+  ]
+}
