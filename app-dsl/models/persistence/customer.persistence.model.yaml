@@ -75,4 +75,4 @@ models:
         fields:
           - email
         unique: true
-        where: email IS NOT NULL
+        where: "email IS NOT NULL"

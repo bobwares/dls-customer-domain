@@ -20,7 +20,7 @@ endpoints:
     onError:
       - type: show-message
         level: error
-        text: Unable to create customer
+        text: "Unable to create customer"
 
   getCustomer:
     method: GET
@@ -42,4 +42,4 @@ endpoints:
     onError:
       - type: show-message
         level: error
-        text: Unable to update customer
+        text: "Unable to update customer"

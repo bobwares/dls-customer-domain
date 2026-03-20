@@ -16,7 +16,7 @@ mappers:
       age:
         from: age
       password_hash:
-        fromExpr: hash(password)
+        fromExpr: "hash(password)"
       phone:
         from: phone
       email:
@@ -63,7 +63,7 @@ mappers:
       age:
         from: age
       password_hash:
-        fromExpr: password != null && password != '' ? hash(password) : preserveExisting()
+        fromExpr: "password != null && password != '' ? hash(password) : preserveExisting()"
       phone:
         from: phone
       email:

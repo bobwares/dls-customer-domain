@@ -44,23 +44,23 @@ mappers:
           country:
             from: homeAddress.country
           region:
-            fromExpr: homeAddress.country == 'USA' ? homeAddress.stateCode : homeAddress.provinceText
+            fromExpr: "homeAddress.country == 'USA' ? homeAddress.stateCode : homeAddress.provinceText"
           postalCode:
             from: homeAddress.postalCode
       billingAddress:
         object:
           line1:
-            fromExpr: sameAsHomeAddress ? homeAddress.line1 : billingAddress.line1
+            fromExpr: "sameAsHomeAddress ? homeAddress.line1 : billingAddress.line1"
           line2:
-            fromExpr: sameAsHomeAddress ? homeAddress.line2 : billingAddress.line2
+            fromExpr: "sameAsHomeAddress ? homeAddress.line2 : billingAddress.line2"
           city:
-            fromExpr: sameAsHomeAddress ? homeAddress.city : billingAddress.city
+            fromExpr: "sameAsHomeAddress ? homeAddress.city : billingAddress.city"
           country:
-            fromExpr: sameAsHomeAddress ? homeAddress.country : billingAddress.country
+            fromExpr: "sameAsHomeAddress ? homeAddress.country : billingAddress.country"
           region:
-            fromExpr: sameAsHomeAddress ? (homeAddress.country == 'USA' ? homeAddress.stateCode : homeAddress.provinceText) : (billingAddress.country == 'USA' ? billingAddress.stateCode : billingAddress.provinceText)
+            fromExpr: "sameAsHomeAddress ? (homeAddress.country == 'USA' ? homeAddress.stateCode : homeAddress.provinceText) : (billingAddress.country == 'USA' ? billingAddress.stateCode : billingAddress.provinceText)"
           postalCode:
-            fromExpr: sameAsHomeAddress ? homeAddress.postalCode : billingAddress.postalCode
+            fromExpr: "sameAsHomeAddress ? homeAddress.postalCode : billingAddress.postalCode"
 
   CustomerFormToUpdateCustomerRequest:
     fromModelRef: ../models/ui/customer-form.model.yaml#/models/CustomerForm

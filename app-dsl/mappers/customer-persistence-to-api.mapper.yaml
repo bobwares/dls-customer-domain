@@ -71,7 +71,7 @@ mappers:
       preferences:
         from: preferences
       sameAsHomeAddress:
-        fromExpr: homeAddress.line1 == billingAddress.line1 && homeAddress.line2 == billingAddress.line2 && homeAddress.city == billingAddress.city && homeAddress.country == billingAddress.country && homeAddress.region == billingAddress.region && homeAddress.postalCode == billingAddress.postalCode
+        fromExpr: "homeAddress.line1 == billingAddress.line1 && homeAddress.line2 == billingAddress.line2 && homeAddress.city == billingAddress.city && homeAddress.country == billingAddress.country && homeAddress.region == billingAddress.region && homeAddress.postalCode == billingAddress.postalCode"
       homeAddress:
         object:
           line1:
@@ -83,9 +83,9 @@ mappers:
           country:
             from: homeAddress.country
           stateCode:
-            fromExpr: homeAddress.country == 'USA' ? homeAddress.region : ''
+            fromExpr: "homeAddress.country == 'USA' ? homeAddress.region : ''"
           provinceText:
-            fromExpr: homeAddress.country == 'USA' ? '' : homeAddress.region
+            fromExpr: "homeAddress.country == 'USA' ? '' : homeAddress.region"
           postalCode:
             from: homeAddress.postalCode
       billingAddress:
@@ -99,8 +99,8 @@ mappers:
           country:
             from: billingAddress.country
           stateCode:
-            fromExpr: billingAddress.country == 'USA' ? billingAddress.region : ''
+            fromExpr: "billingAddress.country == 'USA' ? billingAddress.region : ''"
           provinceText:
-            fromExpr: billingAddress.country == 'USA' ? '' : billingAddress.region
+            fromExpr: "billingAddress.country == 'USA' ? '' : billingAddress.region"
           postalCode:
             from: billingAddress.postalCode
