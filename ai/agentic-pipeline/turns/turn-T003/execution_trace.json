@@ -1,0 +1,8 @@
+{
+  "turnId": "T003",
+  "startedAt": "2026-03-20T05:15:00Z",
+  "finishedAt": "2026-03-20T05:21:00Z",
+  "skillsExecuted": ["turn-init", "turn-end"],
+  "agentsExecuted": ["claude"],
+  "notes": "Created customer list page DSL specification with table, edit/delete actions"
+}
