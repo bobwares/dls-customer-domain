@@ -1,0 +1,114 @@
+version: 1
+
+page:
+  id: customer-list
+  route: /customers
+  title: Customers
+  mode: list
+  layout:
+    type: single-column
+
+  data:
+    source: api
+    endpointRef: ../../backend/customer.backend.yaml#/endpoints/listCustomers
+    stateAlias: customers
+
+  actions:
+    - id: createCustomer
+      type: navigate
+      to: /customers/new
+      label: Add Customer
+      ui:
+        variant: primary
+        icon: plus
+        testId: customer-create-btn
+
+  sections:
+    - id: customer-table
+      type: data-table
+      bind: customers
+      columns:
+        - id: firstName
+          header: First Name
+          field: firstName
+          sortable: true
+          ui:
+            width: md
+
+        - id: lastName
+          header: Last Name
+          field: lastName
+          sortable: true
+          ui:
+            width: md
+
+        - id: email
+          header: Email
+          field: email
+          sortable: true
+          ui:
+            width: lg
+
+        - id: phone
+          header: Phone
+          field: phone
+          ui:
+            width: sm
+
+        - id: city
+          header: City
+          field: homeAddress.city
+          ui:
+            width: md
+
+      rowActions:
+        - id: editCustomer
+          type: navigate
+          to: /customers/{row.id}/edit
+          label: Edit
+          ui:
+            variant: ghost
+            icon: pencil
+            testId: customer-edit-btn
+
+        - id: deleteCustomer
+          type: api-call
+          endpointRef: ../../backend/customer.backend.yaml#/endpoints/deleteCustomer
+          params:
+            id: "{row.id}"
+          confirm:
+            title: Delete Customer
+            message: "Are you sure you want to delete {row.firstName} {row.lastName}?"
+            confirmLabel: Delete
+            cancelLabel: Cancel
+          onSuccess:
+            - type: refresh-data
+            - type: show-message
+              level: success
+              text: "Customer deleted successfully"
+          onError:
+            - type: show-message
+              level: error
+              text: "Unable to delete customer"
+          ui:
+            variant: ghost
+            icon: trash
+            testId: customer-delete-btn
+
+      pagination:
+        enabled: true
+        pageSize: 10
+        pageSizeOptions: [10, 25, 50]
+
+      search:
+        enabled: true
+        placeholder: Search customers...
+        fields: [firstName, lastName, email, phone]
+
+      emptyState:
+        title: No customers found
+        message: Get started by adding your first customer.
+        action:
+          type: navigate
+          to: /customers/new
+          label: Add Customer
