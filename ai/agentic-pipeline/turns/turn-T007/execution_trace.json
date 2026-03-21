@@ -1,0 +1,14 @@
+{
+  "turnId": "T007",
+  "startedAt": "2026-03-21T09:01:43Z",
+  "skillsExecuted": [
+    "dsl-model-interpreter",
+    "turn-end",
+    "turn-init"
+  ],
+  "agentsExecuted": [
+    "claude"
+  ],
+  "notes": "Added listCustomers and deleteCustomer to the backend DSL and reran YAML/reference lint successfully with zero errors.",
+  "finishedAt": "2026-03-21T09:03:01Z"
+}
