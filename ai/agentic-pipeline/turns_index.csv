@@ -3,3 +3,5 @@ T001,2026-03-19T12:00:00Z,2026-03-19T21:37:09Z,34629,main,e27de1a,Initialize dls
 T002,2026-03-19T21:45:00Z,2026-03-19T21:50:00Z,300,turn/T002,4d89316,Add project README and push to remote
 T003,2026-03-20T05:15:00Z,2026-03-20T05:21:00Z,360,turn/T002,649d1e8,Add customer list page DSL specification
 T005,2026-03-20T20:14:33Z,2026-03-20T20:15:42Z,69,turn/T005,0bba841,Add landing page with left navigation
+T006,2026-03-21T08:46:46Z,2026-03-21T08:49:18Z,152,turn/T005,85cf8cc,Lint customer-domain DSL and report unresolved endpoint references
+T007,2026-03-21T09:01:43Z,2026-03-21T09:03:01Z,78,turn/T005,85cf8cc,Add missing backend endpoint specs for customer DSL

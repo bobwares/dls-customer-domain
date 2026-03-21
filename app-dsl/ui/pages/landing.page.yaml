@@ -1,74 +1,104 @@
 # App: customer-domain
 # Package: app-dsl/ui/pages
 # File: landing.page.yaml
-# Version: 0.1.0
-# Turns: T005
+# Version: 0.2.0
+# Turns: T001
 # Author: AI Coding Agent (Claude Opus 4.5)
-# Date: 2026-03-20T20:14:33Z
-# Description: Landing page with left navigation bar
+# Date: 2026-03-20T16:00:00Z
+# Description: Application shell with collapsible left navigation, top navigation, and main content area
 # Log:
-# T005, 0.1.0, 2026/03/20, 08:14 PM, Claude Opus 4.5
+# T005, 0.1.1, 2026/03/20, 08:14 PM, GPT-5.4 Thinking
+# T001, 0.2.0, 2026/03/20, 04:00 PM, Claude Opus 4.5 - Refactor to shell layout pattern
 
 version: 1
+
+shell:
+  id: app-shell
+  title: Commerce App
+  description: Shared application shell for all domain pages
+
+  layout:
+    type: shell
+    structure:
+      - region: sidebar
+        position: left
+        width: 240
+        collapsible: true
+        collapsedWidth: 64
+        ui:
+          testId: sidebar
+      - region: topNav
+        position: top
+        height: 60
+        ui:
+          testId: top-nav
+      - region: main
+        position: center
+        ui:
+          testId: main-content
+
+  navigation:
+    sidebar:
+      id: main-nav
+      position: left
+      collapsible: true
+      items:
+        - id: home
+          label: Home
+          icon: home
+          to: /
+          ui:
+            testId: nav-home
+
+        - id: customers
+          label: Customers
+          icon: users
+          to: /customers
+          ui:
+            testId: nav-customers
+          children:
+            - id: customer-list
+              label: Customer List
+              to: /customers
+              ui:
+                testId: nav-customer-list
+
+            - id: customer-create
+              label: Add Customer
+              to: /customers/new
+              ui:
+                testId: nav-customer-create
+
+    topNav:
+      id: top-nav
+      position: top
+      left:
+        - id: app-title
+          type: text
+          value: Commerce App
+          ui:
+            testId: top-nav-title
+      right:
+        - id: user-greeting
+          type: text
+          value: "Welcome, User"
+          ui:
+            testId: top-nav-user
+
+  contentSlot:
+    id: main-content
+    region: main
+    renderChildren: true
 
 page:
   id: landing
   route: /
-  title: Customer Domain
+  title: Commerce App
   mode: dashboard
-  layout:
-    type: sidebar-left
-    sidebar:
-      width: 240
-      collapsible: true
-
-  navigation:
-    id: main-nav
-    position: left
-    items:
-      - id: home
-        label: Home
-        icon: home
-        to: /
-        ui:
-          testId: nav-home
-
-      - id: customers
-        label: Customers
-        icon: users
-        to: /customers
-        ui:
-          testId: nav-customers
-        children:
-          - id: customer-list
-            label: Customer List
-            to: /customers
-            ui:
-              testId: nav-customer-list
-
-          - id: customer-create
-            label: Add Customer
-            to: /customers/new
-            ui:
-              testId: nav-customer-create
-
-      - id: customer-profile
-        label: Customer Profile
-        icon: user
-        to: /customers/{id}
-        ui:
-          testId: nav-customer-profile
+  shell: app-shell
+  renderIn: main-content
 
   sections:
-    - id: welcome
-      type: hero
-      content:
-        title: Welcome to Customer Domain
-        subtitle: Manage your customer relationships effectively
-        ui:
-          alignment: center
-          spacing: lg
-
     - id: quick-actions
       type: card-grid
       columns: 3

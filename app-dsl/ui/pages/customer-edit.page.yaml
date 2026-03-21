@@ -1,3 +1,14 @@
+# App: customer-domain
+# Package: app-dsl/ui/pages
+# File: customer-edit.page.yaml
+# Version: 0.2.0
+# Turns: T001
+# Author: AI Coding Agent (Claude Opus 4.5)
+# Date: 2026-03-20T16:00:00Z
+# Description: Customer edit page rendered inside app shell
+# Log:
+# T001, 0.2.0, 2026/03/20, 04:00 PM, Claude Opus 4.5 - Add shell rendering
+
 version: 1
 
 page:
@@ -5,6 +16,8 @@ page:
   route: /customers/{id}/edit
   title: Edit Customer
   mode: edit
+  shell: app-shell
+  renderIn: main-content
   layout:
     type: single-column
   form:

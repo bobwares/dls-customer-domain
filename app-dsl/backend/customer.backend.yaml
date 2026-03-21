@@ -1,11 +1,28 @@
+# App: customer-domain
+# Package: app-dsl/backend
+# File: customer.backend.yaml
+# Version: 0.2.1
+# Turns: T007
+# Author: AI Coding Agent (Unknown)
+# Date: 2026-03-21T09:01:43Z
+# Description: Backend endpoint specification for customer create, read, update, list, and delete flows
+# Log:
+# T007, 0.2.1, 2026/03/21, 09:01 AM, AI Coding Agent (Unknown) - Add list and delete endpoint specifications
+
 version: 1
 
 service:
   id: customer-service
   namespace: customer
-  description: Backend endpoint specification for customer create, read, and update flows
+  description: Backend endpoint specification for customer create, read, update, list, and delete flows
 
 endpoints:
+  listCustomers:
+    method: GET
+    path: /api/customers
+    responseModelRef: ../models/api/customer-api.model.yaml#/models/CustomerResponse
+    responseMapperRef: ../mappers/customer-persistence-to-api.mapper.yaml#/mappers/CustomerRecordToCustomerResponse
+
   createCustomer:
     method: POST
     path: /api/customers
@@ -43,3 +60,12 @@ endpoints:
       - type: show-message
         level: error
         text: "Unable to update customer"
+
+  deleteCustomer:
+    method: DELETE
+    path: /api/customers/{id}
+    errorModelRef: ../models/api/customer-api.model.yaml#/models/ValidationError
+    onError:
+      - type: show-message
+        level: error
+        text: "Unable to delete customer"
